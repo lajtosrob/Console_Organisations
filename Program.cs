@@ -131,9 +131,36 @@ namespace Console_Organisations
 
             // 4. feladat: 4) Melyik az első 5 olyan ország, amiben a legtöbb szervezett jött létre?
 
-            Console.WriteLine("Az első 5 ország amiben a legtöbb szervezet jött létre: ");
+            // Megoldás 100-as listára:
 
-            var countrysMost5Organizations = organizations100;
+            Console.WriteLine("Az első 5 ország amiben a legtöbb szervezet jött létre (100): ");
+
+            var countrysMost5Organizations = organizations100
+                .GroupBy(x => x.Country)
+                .OrderByDescending(x => x.Count())
+                .Take(5)
+                .Select(group => new {Country = group.Key, Count = group.Count() });
+
+            foreach (var item in countrysMost5Organizations)
+            {
+                Console.WriteLine($"{item.Country}: {item.Count}");
+            }
+
+
+            // Megoldás 100000-as listára:
+
+            Console.WriteLine("Az első 5 ország amiben a legtöbb szervezet jött létre (100000): ");
+
+            var countrysMost5Organizations2 = organizations100000
+                .GroupBy(x => x.Country)
+                .OrderByDescending(x => x.Count())
+                .Take(5)
+                .Select(group => new { Country = group.Key, Count = group.Count() });
+
+            foreach (var item in countrysMost5Organizations2)
+            {
+                Console.WriteLine($"{item.Country}: {item.Count}");
+            }
 
         }
     }
