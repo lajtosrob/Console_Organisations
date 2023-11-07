@@ -103,6 +103,24 @@ namespace Console_Organisations
                 Console.WriteLine($"2. feladat: Military Industry területen dolgoznak többen. (100000) {militaryIndustry2 - secondaryEducation2} fő");
             }
 
+            // 3. feladat: 3) Sorolja fel évek szerint növekvően, hogy az adott években hány szervezett jött létre!
+
+            Console.WriteLine("3. feladat: Hány szervezet jött létre, évek szerint növekvő sorrendben:");
+
+            var organizationsByYear = organizations100
+                .GroupBy(x => x.Founded)
+                .OrderBy(x => x.Key)
+                .Select(group => new {Year = group.Key, Count = group.Count()});
+
+            foreach (var item in organizationsByYear)
+            {
+                Console.WriteLine($"{item.Year}: {item.Count} szervezet");
+            }
+
+            // 4. feladat: 4) Melyik az első 5 olyan ország, amiben a legtöbb szervezett jött létre?
+
+
+
         }
     }
 }
