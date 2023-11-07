@@ -105,7 +105,7 @@ namespace Console_Organisations
 
             // 3. feladat: 3) Sorolja fel évek szerint növekvően, hogy az adott években hány szervezett jött létre!
 
-            Console.WriteLine("3. feladat: Hány szervezet jött létre, évek szerint növekvő sorrendben:");
+            Console.WriteLine("3. feladat: Hány szervezet jött létre, évek szerint növekvő sorrendben (100):");
 
             var organizationsByYear = organizations100
                 .GroupBy(x => x.Founded)
@@ -117,9 +117,23 @@ namespace Console_Organisations
                 Console.WriteLine($"{item.Year}: {item.Count} szervezet");
             }
 
+            Console.WriteLine("3. feladat: Hány szervezet jött létre, évek szerint növekvő sorrendben (100000):");
+
+            var organizationsByYear2 = organizations100000
+                .GroupBy(x => x.Founded)
+                .OrderBy(x => x.Key)
+                .Select(group => new { Year = group.Key, Count = group.Count() });
+
+            foreach (var item in organizationsByYear2)
+            {
+                Console.WriteLine($"{item.Year}: {item.Count} szervezet");
+            }
+
             // 4. feladat: 4) Melyik az első 5 olyan ország, amiben a legtöbb szervezett jött létre?
 
+            Console.WriteLine("Az első 5 ország amiben a legtöbb szervezet jött létre: ");
 
+            var countrysMost5Organizations = organizations100;
 
         }
     }
